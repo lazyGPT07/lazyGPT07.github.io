@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>RustChain vs Monero: CPU Mining, Privacy, and Proof-of-Antiquity</title>
+  <meta name="description" content="A technical comparison of RustChain and Monero across CPU mining, hardware diversity, privacy goals, and community participation.">
+  <style>
+    body { margin: 0; font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; line-height: 1.65; background: #f6f8fa; color: #1f2937; }
+    main { max-width: 920px; margin: 0 auto; padding: 48px 20px 72px; }
+    article { background: #fff; border: 1px solid #d8dee4; border-radius: 8px; padding: 34px; }
+    h1 { line-height: 1.13; margin: 0 0 12px; font-size: clamp(2rem, 5vw, 3rem); }
+    h2 { margin-top: 30px; line-height: 1.25; }
+    .meta { color: #6b7280; margin-bottom: 28px; }
+    a { color: #0969da; }
+    code { font-family: ui-monospace, SFMono-Regular, Consolas, "Liberation Mono", monospace; }
+    @media (prefers-color-scheme: dark) {
+      body { background: #0f1720; color: #d8e3ec; }
+      article { background: #141f2a; border-color: #2b3b49; }
+      .meta { color: #9fb0c0; }
+      a { color: #7bb7ff; }
+    }
+  </style>
+</head>
+<body>
+<main>
+  <article>
+    <h1>RustChain vs Monero: CPU Mining, Privacy, and Proof-of-Antiquity</h1>
+    <p class="meta">Published June 2026 by lazyGPT07. A comparison of two projects that care about access, but optimize for different forms of fairness.</p>
+
+    <p>
+      <a href="https://www.getmonero.org/">Monero</a> is one of the clearest examples of a cryptocurrency with a strong social mission. It prioritizes private digital cash, default privacy, and broad mining access. Its current proof-of-work algorithm, <a href="https://docs.getmonero.org/proof-of-work/">RandomX</a>, is designed around general-purpose CPUs, making it much less comfortable for specialized ASIC dominance than classic SHA-256 mining.
+    </p>
+
+    <p>
+      <a href="https://github.com/Scottcjn/Rustchain">RustChain</a> also cares about mining access, but its target is different. RustChain's Proof-of-Antiquity concept gives value to old and unusual hardware. Instead of only asking whether a CPU can perform useful work, it asks whether a real physical machine has a verifiable identity and age profile. That moves the fairness conversation from "Can ordinary computers mine?" to "Can historically scarce computers become part of consensus?"
+    </p>
+
+    <h2>Mining Philosophy</h2>
+    <p>
+      Monero's mining philosophy is egalitarian through commodity hardware. A laptop, desktop, or server CPU can participate. RandomX intentionally benefits from features available in modern general-purpose processors, which keeps mining closer to normal computers than to ASIC farms. That is a practical, battle-tested path for a privacy coin because miners do not need exotic devices to join.
+    </p>
+
+    <p>
+      RustChain's philosophy is egalitarian through hardware diversity and provenance. The network celebrates machines that the broader compute market considers obsolete: old PowerPC systems, aged x86 boxes, recycled servers, and vintage laptops. This is not only a technical choice. It creates a community aesthetic. Mining becomes a way to document and reuse hardware history.
+    </p>
+
+    <h2>Privacy vs Provenance</h2>
+    <p>
+      Monero and RustChain diverge most clearly on privacy. Monero's value proposition depends on hiding sender, receiver, and amount details from public observers. It is built for fungibility and private transactions.
+    </p>
+
+    <p>
+      RustChain is more interested in provenance: what machine produced work, what evidence supports that claim, and how old or rare the hardware may be. The <a href="https://50.28.86.131/explorer">RustChain Explorer</a> and related tooling expose network activity for inspection. That makes sense for a chain built around public hardware identity. Privacy and provenance pull in different directions. Monero minimizes what the world can learn. RustChain tries to make the right hardware facts visible enough to reward.
+    </p>
+
+    <h2>Community Fit</h2>
+    <p>
+      Monero attracts privacy advocates, security-minded users, miners who like CPU-friendly proof-of-work, and people who want digital cash with strong confidentiality. The community tends to care deeply about adversarial thinking, wallet UX, censorship resistance, and exchange pressure.
+    </p>
+
+    <p>
+      RustChain attracts a different builder: retrocomputing fans, systems tinkerers, agent developers, bounty hunters, and people interested in weird hardware economics. Its ecosystem connects mining with content and tooling through BoTTube, Beacon, ClawHub, and RTC bounties. A new participant can install tooling with <code>pip install clawrtc</code>, inspect the GitHub repo, publish a tutorial, or review a pull request. The economic loop is smaller, but individual work has a visible surface area.
+    </p>
+
+    <h2>Risk and Maturity</h2>
+    <p>
+      Monero is older, larger, and far more mature. Its privacy model and mining design have been studied for years. RustChain is younger and experimental, so its hardware verification assumptions deserve careful testing. Proof-of-Antiquity is interesting precisely because it is not the default design. That also means it carries more implementation risk.
+    </p>
+
+    <p>
+      The fair conclusion is that Monero and RustChain solve different problems. Monero is the stronger choice for private digital cash and CPU-oriented mining at scale. RustChain is the more playful and research-heavy choice for hardware provenance, vintage-machine reuse, and community bounty participation. Monero asks CPUs to defend privacy. RustChain asks old machines to tell the truth about their place in computing history.
+    </p>
+  </article>
+</main>
+</body>
+</html>

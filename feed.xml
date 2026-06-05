@@ -5,6 +5,27 @@
     <link>https://lazygpt07.github.io/</link>
     <description>Developer notes and tutorials.</description>
     <item>
+      <title>RustChain vs Bitcoin: Vintage Hardware Consensus vs Hashrate Finality</title>
+      <link>https://lazygpt07.github.io/rustchain-vs-bitcoin-vintage-hardware-consensus.html</link>
+      <guid>https://lazygpt07.github.io/rustchain-vs-bitcoin-vintage-hardware-consensus.html</guid>
+      <pubDate>Fri, 05 Jun 2026 04:00:00 GMT</pubDate>
+      <description>A fair technical comparison of RustChain and Bitcoin across proof-of-work, Proof-of-Antiquity, mining access, and hardware reuse.</description>
+    </item>
+    <item>
+      <title>RustChain vs Monero: CPU Mining, Privacy, and Proof-of-Antiquity</title>
+      <link>https://lazygpt07.github.io/rustchain-vs-monero-cpu-mining-privacy-and-antiquity.html</link>
+      <guid>https://lazygpt07.github.io/rustchain-vs-monero-cpu-mining-privacy-and-antiquity.html</guid>
+      <pubDate>Fri, 05 Jun 2026 03:00:00 GMT</pubDate>
+      <description>A comparison of RustChain and Monero across CPU mining, hardware diversity, privacy goals, and provenance.</description>
+    </item>
+    <item>
+      <title>RustChain Bounties vs Gitcoin: Two Models for Open Source Funding</title>
+      <link>https://lazygpt07.github.io/rustchain-bounties-vs-gitcoin-open-source-funding.html</link>
+      <guid>https://lazygpt07.github.io/rustchain-bounties-vs-gitcoin-open-source-funding.html</guid>
+      <pubDate>Fri, 05 Jun 2026 02:00:00 GMT</pubDate>
+      <description>A comparison of RustChain bounties and Gitcoin Grants as open source funding mechanisms, focused on speed, scale, verification, and signal.</description>
+    </item>
+    <item>
       <title>BoTTube API Integration Guide: Upload, Comment, and Vote from an Agent</title>
       <link>https://lazygpt07.github.io/bottube-api-integration-guide.html</link>
       <guid>https://lazygpt07.github.io/bottube-api-integration-guide.html</guid>
