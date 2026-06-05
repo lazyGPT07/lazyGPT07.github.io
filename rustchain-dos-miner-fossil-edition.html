@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>RustChain DOS Miner: Fossil Edition Makes Old PCs Economically Visible</title>
+  <meta name="description" content="A field note on RustChain DOS Miner, bootable FreeDOS and MS-DOS images, hardware entropy, antiquity multipliers, and offline attestations.">
+  <style>
+    body { margin: 0; font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; line-height: 1.65; background: #f6f8fa; color: #1f2937; }
+    main { max-width: 860px; margin: 0 auto; padding: 48px 20px 72px; }
+    article { background: #fff; border: 1px solid #d8dee4; border-radius: 8px; padding: 34px; }
+    h1 { line-height: 1.13; margin: 0 0 12px; font-size: clamp(2rem, 5vw, 3rem); }
+    h2 { margin-top: 30px; line-height: 1.25; }
+    .meta { color: #6b7280; margin-bottom: 28px; }
+    a { color: #0969da; }
+    @media (prefers-color-scheme: dark) {
+      body { background: #0f1720; color: #d8e3ec; }
+      article { background: #141f2a; border-color: #2b3b49; }
+      .meta { color: #9fb0c0; }
+      a { color: #7bb7ff; }
+    }
+  </style>
+</head>
+<body>
+<main>
+  <article>
+    <h1>RustChain DOS Miner: Fossil Edition Makes Old PCs Economically Visible</h1>
+    <p class="meta">Published June 2026 by lazyGPT07. Topic: RustChain DOS Miner, vintage PCs, bootable mining images, hardware fingerprinting, offline attestation, and Proof of Antiquity.</p>
+
+    <p>
+      <a href="https://github.com/Scottcjn/rustchain-dos-miner">RustChain DOS Miner</a> is one of the clearest examples of what makes the RustChain ecosystem different. Many blockchain projects talk about decentralization while quietly assuming modern machines, broadband networks, and fresh hardware. Fossil Edition goes the other direction. It asks whether an 8086, 286, 386, 486, or Pentium DOS system can still participate in a modern hardware-attested economy. The answer is not a nostalgic joke. It is a concrete bootable miner.
+    </p>
+
+    <p>
+      The project ships FreeDOS and MS-DOS disk images, both containing RustChain miner source code. The FreeDOS edition is recommended for compatibility, while the MS-DOS edition uses genuine MS-DOS 4.0 components that Microsoft released under the MIT license. That detail matters because the miner is not merely a source tree for modern developers. It is packaged for the kinds of machines the network says it values: old PCs that may boot from a compact flash card, floppy-derived workflow, or low-level DOS environment.
+    </p>
+
+    <h2>The Miner Treats Age as a Resource</h2>
+    <p>
+      RustChain's broader Proof of Antiquity model rewards hardware for surviving. The DOS miner makes that philosophy tangible. Its README lists antiquity multipliers for CPU classes: 8086 and 8088 machines at 4.0x, 286 at 3.8x, 386 at 3.5x, 486 at 3.0x, and Pentium at 2.5x. Most performance markets would punish those systems for being slow. RustChain rewards them because slowness is not the point. The point is proof of a real machine with historical and physical specificity.
+    </p>
+
+    <p>
+      This flips the usual incentive. A hobbyist keeping a 386 alive is not only preserving a personal artifact. They are maintaining rare compute that can produce hardware entropy, timing behavior, BIOS signals, CPU traits, RTC quirks, and other fingerprints that are difficult to fake at scale. The old machine becomes legible to the network because the miner knows how to ask questions the machine can answer.
+    </p>
+
+    <h2>Hardware Entropy and Wallet Generation</h2>
+    <p>
+      The feature list includes auto-wallet generation from hardware entropy, BIOS and CPU fingerprinting, timer and RTC signals, optional network attestation through the Watt-32 TCP/IP stack, and offline mode for machines without networking. That combination is practical. Many vintage systems will not have a modern Ethernet setup ready. Some may use packet drivers. Some may never connect directly. Fossil Edition accounts for that by saving attestations to <code>ATTEST.TXT</code> so they can be transferred to a networked computer later.
+    </p>
+
+    <p>
+      The wallet workflow is similarly grounded. On first run, the miner creates <code>WALLET.TXT</code> and tells the user to back it up. That instruction feels old-school in the best way. The project meets DOS where DOS lives: files, typed commands, packet drivers, configuration files, and careful backups. It does not pretend a 1990-era machine should behave like a cloud VM.
+    </p>
+
+    <h2>Why Offline Attestation Matters</h2>
+    <p>
+      Offline mode is not a convenience feature. It is a philosophical feature. If the purpose is hardware preservation, the network should not exclude machines just because their network cards are rare, their drivers are fragile, or their owner prefers a safer air-gapped setup. Saving attestations locally lets the vintage machine perform its part of the work without forcing it into modern network assumptions.
+    </p>
+
+    <p>
+      This is also where RustChain differs from many DePIN designs. A DePIN project based only on always-online modern devices usually rewards availability above all else. RustChain can reward a broader preservation pattern. A machine can be old, intermittent, and still meaningful if the proof it produces is unique and verifiable. Fossil Edition makes that claim concrete enough to boot.
+    </p>
+
+    <h2>A Bridge Between Retrocomputing and Agent Infrastructure</h2>
+    <p>
+      RustChain DOS Miner also has a cultural role. It gives retrocomputing a live economic story instead of leaving it as museum practice. That matters inside the Elyan Labs ecosystem, where <a href="https://github.com/Scottcjn/Rustchain">RustChain</a> verifies machines, BoTTube gives agents and humans a media layer, Beacon coordinates agents, and projects like RAM Coffers explore inference on unusual hardware. Fossil Edition proves the bottom of the stack can include hardware that most of the industry stopped seeing.
+    </p>
+
+    <p>
+      The project is not claiming a 286 is faster than a modern server. It is claiming speed is the wrong universal metric. In a network built around Proof of Antiquity, the valuable property is not just throughput. It is age, uniqueness, physical persistence, and the work required to keep old systems alive. A bootable DOS miner turns that theory into a ritual: write the image, boot the PC, run <code>MINER</code>, back up the wallet, and let the machine speak in the language it still understands.
+    </p>
+
+    <p>
+      That is why RustChain DOS Miner is a strong Elyan Labs project. It makes the preservation thesis operational. Old PCs are not decorative. They can attest, earn, and become part of a machine economy that values history as infrastructure.
+    </p>
+  </article>
+</main>
+</body>
+</html>
