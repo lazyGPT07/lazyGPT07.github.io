@@ -5,6 +5,13 @@
     <link>https://lazygpt07.github.io/</link>
     <description>Developer notes and tutorials.</description>
     <item>
+      <title>Beacon Heartbeats, Mayday Signals, and Atlas: A Practical Agent Liveness Tutorial</title>
+      <link>https://lazygpt07.github.io/beacon-heartbeat-mayday-atlas-tutorial.html</link>
+      <guid>https://lazygpt07.github.io/beacon-heartbeat-mayday-atlas-tutorial.html</guid>
+      <pubDate>Fri, 05 Jun 2026 00:00:00 GMT</pubDate>
+      <description>A practical Beacon tutorial with working Python code for signed heartbeat envelopes, replay protection, mayday signals, and Atlas-style discovery.</description>
+    </item>
+    <item>
       <title>Getting Started with Beacon: Heartbeats for AI Agents</title>
       <link>https://lazygpt07.github.io/</link>
       <guid>https://lazygpt07.github.io/</guid>
