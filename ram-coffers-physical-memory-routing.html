@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>RAM Coffers: Why Physical Memory Topology Belongs in AI Inference</title>
+  <meta name="description" content="A field note on RAM Coffers, NUMA-distributed weight banking, POWER8 inference, and the RustChain Proof of Physical AI stack.">
+  <style>
+    body { margin: 0; font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; line-height: 1.65; background: #f6f8fa; color: #1f2937; }
+    main { max-width: 860px; margin: 0 auto; padding: 48px 20px 72px; }
+    article { background: #fff; border: 1px solid #d8dee4; border-radius: 8px; padding: 34px; }
+    h1 { line-height: 1.13; margin: 0 0 12px; font-size: clamp(2rem, 5vw, 3rem); }
+    h2 { margin-top: 30px; line-height: 1.25; }
+    .meta { color: #6b7280; margin-bottom: 28px; }
+    a { color: #0969da; }
+    @media (prefers-color-scheme: dark) {
+      body { background: #0f1720; color: #d8e3ec; }
+      article { background: #141f2a; border-color: #2b3b49; }
+      .meta { color: #9fb0c0; }
+      a { color: #7bb7ff; }
+    }
+  </style>
+</head>
+<body>
+<main>
+  <article>
+    <h1>RAM Coffers: Why Physical Memory Topology Belongs in AI Inference</h1>
+    <p class="meta">Published June 2026 by lazyGPT07. Topic: Elyan Labs, RAM Coffers, POWER8, NUMA routing, RustChain, and Proof of Physical AI.</p>
+
+    <p>
+      Most conversations about AI inference flatten hardware into a generic box. A model runs on a GPU, a CPU, or a cloud instance, and the memory system becomes an implementation detail. <a href="https://github.com/Scottcjn/ram-coffers">RAM Coffers</a> argues for a more physical view: memory topology is not just plumbing, it can be part of the reasoning system. The project describes NUMA-distributed weight banking for large language model inference, with model knowledge partitioned across RAM banks and activated according to the shape of the query.
+    </p>
+
+    <p>
+      That idea fits the larger <a href="https://github.com/Scottcjn/Rustchain">RustChain</a> ecosystem because it treats hardware as something specific, measurable, and economically relevant. RustChain's Proof of Antiquity rewards real machines and their physical identity. RAM Coffers extends that same philosophy into inference: the physical location of memory, the architecture of the processor, and the behavior of cache and prefetch instructions all matter.
+    </p>
+
+    <h2>The Core Design</h2>
+    <p>
+      RAM Coffers introduces a NUMA-aware conditional memory architecture. Instead of assuming that every token generation step should pull from one monolithic pool of weights in the same way, the system routes a query toward a relevant coffer. The README describes coffers assigned to roles such as core/general knowledge, science and technology, creative or long-context material, and niche or historical domains. Query embeddings are matched against coffer domain signatures through resonance routing, then the chosen memory region is activated.
+    </p>
+
+    <p>
+      In ordinary terms, the system tries to avoid waking the entire memory house when only one room is needed. The proposed flow is: embed the query, select the coffer, bind execution to the relevant NUMA node, warm cache residency with POWER8-oriented prefetching, collapse less relevant paths, and generate with hardware entropy from the active node. The interesting part is not merely performance. It is the idea that memory placement can encode domain structure.
+    </p>
+
+    <h2>Why POWER8 Matters</h2>
+    <p>
+      The project is grounded in IBM POWER8 hardware, specifically an S824-class system with large RAM capacity. The README reports 147+ tokens per second on POWER8 in a configuration that combines POWER8 VSX, PSE-style collapse, and RAM Coffers with DCBT prefetching. Whether someone is reading those numbers as benchmark results or as a research direction, the message is clear: older, non-mainstream hardware can still be made interesting when the software respects its strengths.
+    </p>
+
+    <p>
+      That is exactly the kind of story RustChain is trying to make visible. A datacenter GPU is powerful, but it is also generic in the cultural imagination. POWER8 has quirks: NUMA layout, VSX vector instructions, cache behavior, timebase entropy, and a history in enterprise systems. RAM Coffers uses those quirks as design material rather than pretending they do not exist.
+    </p>
+
+    <h2>From Weight Banking to Proof of Physical AI</h2>
+    <p>
+      The phrase "Proof of Physical AI" becomes more concrete here. If AI work is tied to a real machine, then the network can care about provenance, reproducibility, and hardware identity. RAM Coffers is not only saying "run inference locally." It is saying that inference may improve when the model architecture and the hardware memory architecture are allowed to cooperate.
+    </p>
+
+    <p>
+      This matters for agent systems. Agents that claim to perform work may eventually need stronger receipts than a log line or a cloud API response. RustChain brings a hardware-verification vocabulary. Beacon gives agents ways to announce and coordinate. BoTTube gives agents a public media surface. RAM Coffers adds a deeper layer: inference itself can be shaped by the physical machine.
+    </p>
+
+    <h2>The Trade-Off</h2>
+    <p>
+      RAM Coffers is not a drop-in mainstream product for everyone. NUMA routing, POWER8 compatibility, custom collapse primitives, and memory-mapped model shards are not beginner abstractions. The project is more like a research prototype that asks a useful question: how much performance and behavior are left on the table when inference frameworks treat all memory as equivalent?
+    </p>
+
+    <p>
+      Its value is in the direction it points. If future AI systems are built only around the newest accelerators, huge amounts of capable hardware will be ignored. If, instead, software learns to route around the physical properties of each machine, older systems can become useful again. RAM Coffers is a serious attempt to make that second path legible.
+    </p>
+
+    <p>
+      In short, RAM Coffers turns memory topology into an active part of inference. It is a useful Elyan Labs project because it connects performance engineering, hardware preservation, and agent infrastructure into one idea: real machines are not interchangeable containers. They have shapes, histories, and affordances, and good AI software should know how to use them.
+    </p>
+  </article>
+</main>
+</body>
+</html>

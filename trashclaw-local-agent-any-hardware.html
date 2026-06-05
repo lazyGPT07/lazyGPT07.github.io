@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>TrashClaw: A Local Tool-Use Agent for Any Hardware</title>
+  <meta name="description" content="A practical article on TrashClaw, local tool-use agents, zero-dependency design, and why hardware-friendly agents matter.">
+  <style>
+    body { margin: 0; font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; line-height: 1.65; background: #f7f8fb; color: #1f2937; }
+    main { max-width: 860px; margin: 0 auto; padding: 48px 20px 72px; }
+    article { background: #fff; border: 1px solid #d8dee4; border-radius: 8px; padding: 34px; }
+    h1 { line-height: 1.13; margin: 0 0 12px; font-size: clamp(2rem, 5vw, 3rem); }
+    h2 { margin-top: 30px; line-height: 1.25; }
+    .meta { color: #6b7280; margin-bottom: 28px; }
+    a { color: #0969da; }
+    @media (prefers-color-scheme: dark) {
+      body { background: #0f1720; color: #d8e3ec; }
+      article { background: #141f2a; border-color: #2b3b49; }
+      .meta { color: #9fb0c0; }
+      a { color: #7bb7ff; }
+    }
+  </style>
+</head>
+<body>
+<main>
+  <article>
+    <h1>TrashClaw: A Local Tool-Use Agent for Any Hardware</h1>
+    <p class="meta">Published June 2026 by lazyGPT07. Topic: Elyan Labs, TrashClaw, local agents, tool use, vintage hardware, and RustChain.</p>
+
+    <p>
+      <a href="https://github.com/Scottcjn/trashclaw">TrashClaw</a> is a local tool-use agent with a refreshingly direct premise: run on the machine in front of you, talk to a local or OpenAI-compatible LLM server, and use terminal tools to actually do work. The README describes it as a general-purpose local agent that runs from a 2013 Mac Pro to a PowerBook G4 to IBM POWER8 hardware. That range is the important part. TrashClaw is not designed only for polished cloud environments; it is designed for real machines with quirks.
+    </p>
+
+    <p>
+      The project is part of the same Elyan Labs world as <a href="https://github.com/Scottcjn/Rustchain">RustChain</a>, BoTTube, Beacon, and RAM Coffers. Those projects share a recurring theme: software should not pretend physical infrastructure is abstract. RustChain rewards preserved machines. RAM Coffers uses hardware memory topology. BoTTube gives agents a media surface. TrashClaw gives a local machine a practical agent loop.
+    </p>
+
+    <h2>What TrashClaw Actually Does</h2>
+    <p>
+      TrashClaw is not just a chatbot prompt wrapped in a terminal. It exposes a tool set: file reads and writes, exact edits, unified diff patches, shell commands with approval, recursive search, directory listing, URL fetches, git status, git diff, commits, clipboard access, and a dedicated thinking tool. A user gives it a task, the model plans tool calls, observes results, and iterates. That makes it useful for project maintenance work such as finding TODO comments, patching files, organizing notes, or inspecting a repository.
+    </p>
+
+    <p>
+      The project also includes commands that make it feel like a working shell companion rather than a demo. It can change directories, preload files into context, show diffs, export sessions, load saved conversations, remember project notes, compact context, show server/model status, and undo the last file write or edit. Those are mundane features, but mundane features are what turn an agent into something you can keep using.
+    </p>
+
+    <h2>The Zero-Dependency Bet</h2>
+    <p>
+      One of TrashClaw's strongest design choices is its minimal dependency story. The README emphasizes Python 3.7+ standard library only, plus any local LLM server. No complicated package tree. No mandatory hosted account. No default cloud key. That matters because local agents tend to fail at the setup layer before they ever get to the interesting work. A single-file, low-dependency tool has a better chance of running on the odd machines that RustChain and Elyan Labs care about.
+    </p>
+
+    <p>
+      The plugin system follows the same practical style. Drop a Python file into the plugin directory, define a tool schema and a run function, and it becomes a new capability. That keeps the core small while letting users add their own local actions. For a hardware-diverse ecosystem, this is sensible: the tool needed on a PowerPC machine may not be the same as the tool needed on a modern workstation.
+    </p>
+
+    <h2>Why Local Agents Matter</h2>
+    <p>
+      A lot of agent products assume the agent lives somewhere else. It has a browser sandbox, a managed runtime, and a cloud API. TrashClaw flips that assumption. The agent lives where the files are, where the shell is, and where the hardware constraints are visible. That opens a different class of use cases: maintaining old systems, patching local projects, operating inside private codebases, or running useful workflows where cloud services are unavailable or unwanted.
+    </p>
+
+    <p>
+      This fits RustChain's preservation thesis. If an old computer still boots, it can still do useful coordination and maintenance work. It may not run a frontier model locally, but it can connect to a local LLM server, perform file operations, fetch documentation, and help maintain itself or nearby projects. The point is not that every machine becomes a supercomputer. The point is that every machine can remain part of the network of work.
+    </p>
+
+    <h2>Where It Still Needs Care</h2>
+    <p>
+      Tool-use agents are powerful, which means they need careful defaults. TrashClaw's shell approval model is important because commands can mutate state. The undo and diff commands are also important because local work should be inspectable. The project will be strongest when it continues to favor explicit review, reversible edits, and readable logs over flashy autonomy.
+    </p>
+
+    <p>
+      TrashClaw matters because it is small enough to understand and practical enough to use. It gives Elyan Labs a local agent primitive that matches the rest of the stack: hardware-aware, terminal-native, and friendly to machines outside the mainstream upgrade treadmill. In a world full of cloud agent dashboards, that groundedness is the feature.
+    </p>
+  </article>
+</main>
+</body>
+</html>
