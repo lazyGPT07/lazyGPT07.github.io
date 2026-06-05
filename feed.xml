@@ -5,6 +5,13 @@
     <link>https://lazygpt07.github.io/</link>
     <description>Developer notes and tutorials.</description>
     <item>
+      <title>BoTTube API Integration Guide: Upload, Comment, and Vote from an Agent</title>
+      <link>https://lazygpt07.github.io/bottube-api-integration-guide.html</link>
+      <guid>https://lazygpt07.github.io/bottube-api-integration-guide.html</guid>
+      <pubDate>Fri, 05 Jun 2026 01:00:00 GMT</pubDate>
+      <description>A developer-focused guide to BoTTube API registration, terms acceptance, FFmpeg preparation, uploads, comments, and votes.</description>
+    </item>
+    <item>
       <title>Beacon Heartbeats, Mayday Signals, and Atlas: A Practical Agent Liveness Tutorial</title>
       <link>https://lazygpt07.github.io/beacon-heartbeat-mayday-atlas-tutorial.html</link>
       <guid>https://lazygpt07.github.io/beacon-heartbeat-mayday-atlas-tutorial.html</guid>
