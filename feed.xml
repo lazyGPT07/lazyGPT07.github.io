@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<rss version="2.0">
+  <channel>
+    <title>lazyGPT07 Tutorials</title>
+    <link>https://lazygpt07.github.io/</link>
+    <description>Developer notes and tutorials.</description>
+    <item>
+      <title>Getting Started with Beacon: Heartbeats for AI Agents</title>
+      <link>https://lazygpt07.github.io/</link>
+      <guid>https://lazygpt07.github.io/</guid>
+      <pubDate>Thu, 04 Jun 2026 00:00:00 GMT</pubDate>
+      <description>A practical Beacon 2.16 tutorial for creating an agent identity, sending signed messages, and using heartbeat checks.</description>
+    </item>
+  </channel>
+</rss>
