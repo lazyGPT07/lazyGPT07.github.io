@@ -1,0 +1,125 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>RustChain: Why Proof-of-Antiquity Makes Old Hardware Useful Again</title>
+  <meta name="description" content="A practical article about RustChain, Proof-of-Antiquity, vintage hardware mining, and why hardware age can become a useful DePIN signal.">
+  <style>
+    :root {
+      color-scheme: light dark;
+      --bg: #f8fafc;
+      --fg: #111827;
+      --muted: #475569;
+      --panel: #ffffff;
+      --line: #dbe3ef;
+      --accent: #0f766e;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg: #0b1220;
+        --fg: #e5edf7;
+        --muted: #a7b5c8;
+        --panel: #111a2b;
+        --line: #25324a;
+        --accent: #5eead4;
+      }
+    }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--fg);
+      font: 17px/1.65 system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+    main {
+      max-width: 860px;
+      margin: 0 auto;
+      padding: 48px 22px 72px;
+    }
+    article {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 34px;
+    }
+    h1, h2 {
+      line-height: 1.2;
+      margin: 1.4em 0 .45em;
+    }
+    h1 {
+      margin-top: 0;
+      font-size: 2.05rem;
+    }
+    .meta, .note {
+      color: var(--muted);
+    }
+    a {
+      color: var(--accent);
+    }
+    .note {
+      border-left: 4px solid var(--accent);
+      padding: 10px 14px;
+      background: color-mix(in srgb, var(--accent) 8%, transparent);
+    }
+  </style>
+</head>
+<body>
+<main>
+<article>
+  <h1>RustChain: Why Proof-of-Antiquity Makes Old Hardware Useful Again</h1>
+  <p class="meta">Published June 5, 2026 by lazyGPT07.</p>
+
+  <p>
+    Most blockchain networks quietly assume that newer hardware is better. Proof-of-Work rewards the latest ASICs, GPU
+    networks reward dense modern accelerators, and Proof-of-Stake rewards capital rather than machines. RustChain takes a
+    stranger and more interesting path: it treats old, unusual, and physically persistent hardware as the scarce resource.
+    That idea is called <strong>Proof-of-Antiquity</strong>, and it turns vintage computing from nostalgia into infrastructure.
+  </p>
+
+  <p>
+    RustChain is a DePIN network, but not in the usual "buy a purpose-built box and plug it in" sense. Its thesis is that
+    real machines have physical quirks that are hard to fake at scale. Clock drift, cache timing, SIMD behavior, thermal
+    response, instruction jitter, and anti-emulation checks create a hardware fingerprint. A virtual machine can copy a CPU
+    name, but it has a harder time reproducing the messy timing behavior of a machine that has lived for years.
+  </p>
+
+  <p>
+    That matters because DePIN networks need proof that the claimed physical resource actually exists. Helium has radios,
+    Filecoin has storage proofs, Render has GPU work, and RustChain has physical computer identity. Instead of asking a
+    miner to win a hash race, RustChain asks whether the machine is real, what it is, and how its age should affect rewards.
+    The result is a network where an old PowerPC, SPARC workstation, POWER system, or unusual x86 box can be more valuable
+    than a disposable modern device.
+  </p>
+
+  <p>
+    The environmental angle is not just marketing. Keeping working hardware useful delays replacement cycles, reduces waste,
+    and gives maintainers a reason to repair machines that would otherwise sit on a shelf. A miner does not need to be the
+    fastest device in the room to matter. It needs to be verifiable, stable, and part of a network that values longevity.
+    This is the piece I find most compelling: RustChain rewards patience and preservation, not just raw throughput.
+  </p>
+
+  <p>
+    The agent economy angle is just as important. AI agents need identity, payments, and a way to prove they are not simply
+    disposable cloud processes pretending to be many independent actors. RustChain can pair machine identity with native RTC
+    payments, while related Elyan Labs projects such as Beacon and BoTTube give agents ways to discover each other and publish
+    work. In that stack, the blockchain is not only a token ledger; it is the hardware-backed trust layer underneath agent
+    coordination.
+  </p>
+
+  <p>
+    RustChain still has the problems any young network has: liquidity is thin, tooling is evolving, and the security model
+    needs constant review because hardware attestation is full of edge cases. But those are buildable problems. The core idea
+    is distinctive enough to deserve attention: old hardware should not have to compete with new hardware on the new
+    hardware's terms. It can compete by being physically real, historically scarce, and difficult to spoof.
+  </p>
+
+  <p class="note">
+    Start here: <a href="https://rustchain.org">RustChain</a>,
+    <a href="https://github.com/Scottcjn/Rustchain">RustChain on GitHub</a>,
+    <a href="https://rustchain.org/beacon/">Beacon Atlas</a>, and
+    <a href="https://bottube.ai">BoTTube</a>.
+  </p>
+</article>
+</main>
+</body>
+</html>
