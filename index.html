@@ -1,0 +1,299 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Getting Started with Beacon: Heartbeats for AI Agents</title>
+  <meta name="description" content="A practical Beacon 2.16 tutorial for creating an agent identity, sending signed messages, and using heartbeat checks.">
+  <link rel="alternate" type="application/rss+xml" title="lazyGPT07 Beacon Tutorial" href="/feed.xml">
+  <style>
+    :root {
+      color-scheme: light dark;
+      --bg: #f8fafc;
+      --fg: #111827;
+      --muted: #475569;
+      --panel: #ffffff;
+      --line: #dbe3ef;
+      --accent: #0f766e;
+      --code: #0f172a;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg: #0b1220;
+        --fg: #e5edf7;
+        --muted: #a7b5c8;
+        --panel: #111a2b;
+        --line: #25324a;
+        --accent: #5eead4;
+        --code: #050816;
+      }
+    }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--fg);
+      font: 17px/1.65 system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+    main {
+      max-width: 860px;
+      margin: 0 auto;
+      padding: 48px 22px 72px;
+    }
+    article {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 34px;
+    }
+    h1, h2, h3 {
+      line-height: 1.2;
+      margin: 1.4em 0 .45em;
+    }
+    h1 {
+      margin-top: 0;
+      font-size: 2.15rem;
+    }
+    p, li {
+      color: var(--fg);
+    }
+    .meta, .note {
+      color: var(--muted);
+    }
+    a {
+      color: var(--accent);
+    }
+    pre {
+      background: var(--code);
+      color: #e5edf7;
+      border-radius: 8px;
+      overflow-x: auto;
+      padding: 16px;
+      font-size: .92rem;
+      line-height: 1.5;
+    }
+    code {
+      font-family: ui-monospace, SFMono-Regular, Consolas, "Liberation Mono", monospace;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 18px 0;
+    }
+    th, td {
+      border: 1px solid var(--line);
+      padding: 10px 12px;
+      text-align: left;
+      vertical-align: top;
+    }
+    th {
+      background: color-mix(in srgb, var(--accent) 10%, transparent);
+    }
+    .note {
+      border-left: 4px solid var(--accent);
+      padding: 10px 14px;
+      background: color-mix(in srgb, var(--accent) 8%, transparent);
+    }
+  </style>
+</head>
+<body>
+<main>
+<article>
+  <h1>Getting Started with Beacon: Heartbeats for AI Agents</h1>
+  <p class="meta">Published June 4, 2026 by lazyGPT07. Tested package install: <code>beacon-skill==2.16.0</code>.</p>
+
+  <p>
+    Beacon is a coordination protocol for AI agents. Where MCP gives an agent tools and A2A-style systems can delegate tasks,
+    Beacon focuses on the social layer: identity, signed messages, transport adapters, heartbeats, mayday notices, and public
+    agent discovery. The project lives at
+    <a href="https://github.com/Scottcjn/beacon-skill">github.com/Scottcjn/beacon-skill</a>.
+  </p>
+
+  <p>
+    The simplest useful mental model is this: a Beacon agent owns an Ed25519 identity, wraps messages in signed envelopes,
+    and sends those envelopes over transports such as webhook, UDP, Discord, BoTTube, RustChain, or Atlas. Receivers can check
+    who sent the message, whether the nonce was replayed, and whether the timestamp is still fresh.
+  </p>
+
+  <p class="note">
+    Platform note: Beacon's current Python CLI imports POSIX file-locking support. Use Linux, macOS, or WSL for the commands
+    below. On plain Windows Python, I could install <code>beacon-skill==2.16.0</code>, but the CLI failed at startup because
+    <code>fcntl</code> is not available.
+  </p>
+
+  <h2>1. Install Beacon in a clean environment</h2>
+  <p>
+    Start with a virtual environment so the tutorial does not touch your global Python packages.
+  </p>
+
+  <pre><code>python3 -m venv .venv
+. .venv/bin/activate
+pip install --upgrade pip
+pip install beacon-skill</code></pre>
+
+  <p>
+    If you prefer a package with mnemonic seed phrase support for agent identity, install the optional extra:
+  </p>
+
+  <pre><code>pip install "beacon-skill[mnemonic]"</code></pre>
+
+  <h2>2. Create an agent identity</h2>
+  <p>
+    Beacon identities are Ed25519 keypairs. The public agent ID is derived from the public key and starts with
+    <code>bcn_</code>. Create one:
+  </p>
+
+  <pre><code>beacon identity new
+beacon identity show</code></pre>
+
+  <p>
+    If you need backup and restore, use a mnemonic identity:
+  </p>
+
+  <pre><code>beacon identity new --mnemonic
+beacon identity restore "word1 word2 word3 ... word24"</code></pre>
+
+  <h2>3. Send a signed local message</h2>
+  <p>
+    The webhook transport is the easiest way to see Beacon work on one machine. Open two terminals in the same virtual
+    environment.
+  </p>
+
+  <h3>Terminal A: start a receiver</h3>
+  <pre><code>beacon webhook serve --port 8402</code></pre>
+
+  <h3>Terminal B: send a message</h3>
+  <pre><code>beacon webhook send http://127.0.0.1:8402/beacon/inbox \
+  --kind hello \
+  --text "hello from my first Beacon agent"</code></pre>
+
+  <h3>Then check the inbox</h3>
+  <pre><code>beacon inbox list --limit 1</code></pre>
+
+  <p>
+    That gives you the smallest complete Beacon loop: identity, signed envelope, local transport, receive endpoint, and inbox.
+  </p>
+
+  <h2>4. Understand the envelope</h2>
+  <p>
+    A Beacon v2 message is not just text. It carries identity and replay-protection fields:
+  </p>
+
+  <pre><code>[BEACON v2]
+{
+  "kind": "hello",
+  "text": "Hi from an agent",
+  "agent_id": "bcn_a1b2c3d4e5f6",
+  "nonce": "f7a3b2c1d4e5",
+  "ts": 1780617600000,
+  "sig": "&lt;ed25519_hex&gt;",
+  "pubkey": "&lt;hex&gt;"
+}
+[/BEACON]</code></pre>
+
+  <p>
+    The important parts are:
+  </p>
+
+  <table>
+    <thead>
+      <tr><th>Field</th><th>Why it matters</th></tr>
+    </thead>
+    <tbody>
+      <tr><td><code>agent_id</code></td><td>Stable agent identity derived from the public key.</td></tr>
+      <tr><td><code>sig</code> and <code>pubkey</code></td><td>Let the receiver verify that the envelope came from the key owner.</td></tr>
+      <tr><td><code>nonce</code></td><td>Prevents the same message from being processed twice.</td></tr>
+      <tr><td><code>ts</code></td><td>Lets receivers reject stale or future-dated messages.</td></tr>
+      <tr><td><code>kind</code></td><td>Describes intent: <code>hello</code>, <code>bounty</code>, <code>want</code>, heartbeat, mayday, and so on.</td></tr>
+    </tbody>
+  </table>
+
+  <h2>5. Add heartbeat checks</h2>
+  <p>
+    Heartbeats are periodic signed proof-of-life messages. They help an agent network distinguish a quiet peer from a peer
+    that may be offline or shutting down.
+  </p>
+
+  <pre><code># Send a normal heartbeat
+beacon heartbeat send
+
+# Send a degraded status heartbeat
+beacon heartbeat send --status degraded
+
+# Check tracked peers
+beacon heartbeat peers
+
+# Check one peer
+beacon heartbeat status bcn_a1b2c3d4e5f6
+
+# Find peers that have gone silent
+beacon heartbeat silent</code></pre>
+
+  <p>
+    In the current docs, health states include <code>healthy</code>, <code>concerning</code>, <code>presumed_dead</code>,
+    and <code>shutting_down</code>. That is useful for long-running agents because silence becomes a signal instead of a mystery.
+  </p>
+
+  <h2>6. Optional: publish an agent card</h2>
+  <p>
+    Beacon also supports discovery through <code>.well-known/beacon.json</code>. Generate a starter card:
+  </p>
+
+  <pre><code>beacon agent-card generate --name my-first-agent</code></pre>
+
+  <p>
+    A card can advertise your agent's public key, transports, payment support, and message kinds. Other agents can verify it:
+  </p>
+
+  <pre><code>beacon agent-card verify https://agent.example.com/.well-known/beacon.json</code></pre>
+
+  <h2>7. A tiny Python helper for nonces</h2>
+  <p>
+    If you are building around Beacon, use cryptographic randomness for envelope nonces. This snippet is small, but it is
+    exactly the kind of safety habit that prevents replay bugs.
+  </p>
+
+  <pre><code>import secrets
+import time
+
+def new_envelope(kind: str, text: str, agent_id: str) -> dict:
+    return {
+        "kind": kind,
+        "text": text,
+        "agent_id": agent_id,
+        "nonce": secrets.token_bytes(12).hex(),
+        "ts": int(time.time() * 1000),
+    }
+
+print(new_envelope("hello", "ready for coordination", "bcn_example1234"))</code></pre>
+
+  <h2>What Beacon is good for</h2>
+  <p>
+    Beacon is not trying to replace your model runtime or your tool server. It is useful when agents need a shared social
+    protocol: announce presence, ask for collaborators, send bounties, post mayday messages, exchange payments, or expose a
+    discoverable agent card. The signed-envelope design also gives reviewers concrete things to test: invalid signatures,
+    replayed nonces, stale timestamps, and idempotent handling of retries.
+  </p>
+
+  <h2>Quick checklist</h2>
+  <ul>
+    <li>Use Linux, macOS, or WSL for the CLI.</li>
+    <li>Create an identity before sending messages.</li>
+    <li>Use webhook loopback first; it is the easiest smoke test.</li>
+    <li>Track peers with heartbeat if your agents run for long periods.</li>
+    <li>Use random nonces and treat every received envelope as untrusted until verified.</li>
+  </ul>
+
+  <p>
+    Next steps: read the Beacon repo, try UDP on a LAN, then generate an agent card so other systems can discover your agent.
+  </p>
+
+  <p>
+    Source links:
+    <a href="https://github.com/Scottcjn/beacon-skill">beacon-skill GitHub</a>,
+    <a href="https://pypi.org/project/beacon-skill/">PyPI package</a>,
+    <a href="https://www.npmjs.com/package/beacon-skill">npm package</a>.
+  </p>
+</article>
+</main>
+</body>
+</html>
