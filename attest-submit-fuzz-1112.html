@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>RustChain /attest/submit fuzz report - bounty #1112</title><style>body{font-family:system-ui,-apple-system,Segoe UI,sans-serif;max-width:920px;margin:40px auto;padding:0 20px;line-height:1.55;color:#17202a}pre{background:#f6f8fa;padding:14px;overflow:auto;border:1px solid #d0d7de;border-radius:6px}code,pre{font-family:ui-monospace,SFMono-Regular,Consolas,monospace}table{border-collapse:collapse;width:100%;margin:16px 0}td,th{border:1px solid #d0d7de;padding:8px;text-align:left;vertical-align:top}th{background:#f6f8fa}.finding{border-left:4px solid #cf222e;padding-left:12px;background:#fff8f8}</style></head><body>
+<h1>RustChain /attest/submit fuzz report</h1>
+<p><strong>Bounty:</strong> <a href="https://github.com/Scottcjn/rustchain-bounties/issues/1112">Scottcjn/rustchain-bounties#1112</a></p>
+<p><strong>Target:</strong> <code>POST https://rustchain.org/attest/submit</code></p>
+<p><strong>Run window:</strong> <code>2026-06-05T05:30:08.786726+00:00</code> to <code>2026-06-05T05:31:29.660879+00:00</code></p>
+<p><strong>Wallet:</strong> <code>RTC6d4ad0640a1543cc32f1e7c89375ba4c51228b2a</code></p>
+<h2>Scope</h2><p>Bounded, rate-limited fuzz pass. No mining, valid attestation, filesystem access, auth bypass, or high-volume traffic. Used fixed invalid nonces and synthetic miner identifiers under <code>lazygpt07-fuzz-1112-*</code>.</p>
+<ul><li>125 malformed/adversarial cases sent.</li><li>0.35 second delay between requests.</li><li>0 request/client errors.</li><li>Coverage: malformed JSON, wrong content type, top-level non-object JSON, missing fields, wrong top-level types, wrong nested types, oversized strings up to 8192 bytes, basic injection-style strings, null bytes, and unicode strings.</li></ul>
+<h2>Summary</h2><table><thead><tr><th>Status</th><th>Count</th></tr></thead><tbody><tr><td>400</td><td>96</td></tr><tr><td>409</td><td>10</td></tr><tr><td>422</td><td>7</td></tr><tr><td>500</td><td>12</td></tr></tbody></table>
+<h2>Main Finding</h2><div class="finding"><p>Truthy non-string values in <code>signature</code> and <code>public_key</code> still produce <code>500 INTERNAL_ERROR</code> on the live endpoint. These should be deterministic 4xx validation responses.</p></div>
+<h2>Confirmed 500 Cases</h2><table><thead><tr><th>Case</th><th>Field</th><th>Value class</th><th>Response</th></tr></thead><tbody>
+<tr><td>63</td><td><code>signature</code></td><td><code>true</code></td><td>500 INTERNAL_ERROR</td></tr><tr><td>65</td><td><code>signature</code></td><td><code>123</code></td><td>500 INTERNAL_ERROR</td></tr><tr><td>66</td><td><code>signature</code></td><td><code>-1</code></td><td>500 INTERNAL_ERROR</td></tr><tr><td>67</td><td><code>signature</code></td><td><code>1.5</code></td><td>500 INTERNAL_ERROR</td></tr><tr><td>69</td><td><code>signature</code></td><td><code>["x"]</code></td><td>500 INTERNAL_ERROR</td></tr><tr><td>71</td><td><code>signature</code></td><td><code>{"x":"y"}</code></td><td>500 INTERNAL_ERROR</td></tr><tr><td>73</td><td><code>public_key</code></td><td><code>true</code></td><td>500 INTERNAL_ERROR</td></tr><tr><td>75</td><td><code>public_key</code></td><td><code>123</code></td><td>500 INTERNAL_ERROR</td></tr><tr><td>76</td><td><code>public_key</code></td><td><code>-1</code></td><td>500 INTERNAL_ERROR</td></tr><tr><td>77</td><td><code>public_key</code></td><td><code>1.5</code></td><td>500 INTERNAL_ERROR</td></tr><tr><td>79</td><td><code>public_key</code></td><td><code>["x"]</code></td><td>500 INTERNAL_ERROR</td></tr><tr><td>81</td><td><code>public_key</code></td><td><code>{"x":"y"}</code></td><td>500 INTERNAL_ERROR</td></tr>
+</tbody></table>
+<h2>Minimal Reproduction</h2><pre>{
+  "miner": "lazygpt07-fuzz-1112-repro",
+  "miner_id": "lazygpt07-fuzz-1112-repro",
+  "nonce": "invalid-nonce-repro",
+  "device": {"family": "x86_64", "arch": "AMD64", "model": "AMD64 Family 25 Model 68", "cpu": "AMD64 Family 25 Model 68", "cores": 12, "memory_gb": 32, "machine": "AMD64"},
+  "signals": {"macs": ["02:00:00:00:00:01"], "hostname": "redacted-fuzz-host"},
+  "report": {"nonce": "invalid-nonce-repro", "commitment": "0000000000000000000000000000000000000000000000000000000000000000"},
+  "fingerprint": {"checks": {}, "all_passed": false},
+  "signature": true,
+  "public_key": "not-a-valid-public-key"
+}</pre>
+<h2>Observed Response</h2><pre>{"code":"INTERNAL_ERROR","error":"internal_error","message":"Attestation submission failed due to an internal error","ok":false}</pre>
+<h2>Expected Behavior</h2><p>Reject non-string <code>signature</code> and <code>public_key</code> values before normalization, decoding, or cryptographic processing. Return 400-class validation codes such as <code>INVALID_SIGNATURE_TYPE</code> or <code>INVALID_PUBLIC_KEY_TYPE</code>.</p>
+<h2>Suggested Fix</h2><ul><li>Type-check <code>signature</code> and <code>public_key</code> before any <code>.strip()</code>, <code>.lower()</code>, base64/base58 decode, or crypto verification.</li><li>Return deterministic 4xx validation codes for non-string scalar, list, and object values.</li><li>Add regression tests for <code>true</code>, integer, float, list, and object values for both fields.</li></ul>
+<h2>Raw local summary</h2><pre># RustChain /attest/submit fuzz report
+
+- Target: `https://rustchain.org/attest/submit`
+- Started: `2026-06-05T05:30:08.786726+00:00`
+- Finished: `2026-06-05T05:31:29.660879+00:00`
+- Cases sent: `125`
+- Status counts: `{'400': 96, '409': 10, '500': 12, '422': 7}`
+- 500-class responses: `12`
+- Request/client errors: `0`
+
+## Coverage
+
+- malformed JSON and wrong content type
+- top-level non-object JSON roots
+- missing required fields
+- wrong top-level field types
+- wrong nested object/array/boolean/number types
+- oversized strings up to 8192 bytes
+- basic injection-style strings, null bytes, and unicode edge cases
+
+## Category breakdown
+
+- `malformed_json`: `{'400': 6}`
+- `missing_fields`: `{'400': 14, '409': 2}`
+- `top_level_type`: `{'400': 9}`
+- `wrong_nested_types`: `{'400': 37, '422': 7}`
+- `wrong_top_level_types`: `{'400': 30, '409': 8, '500': 12}`
+
+## Findings
+
+The run observed 500-class responses that should be treated as validation bugs:
+- case `63` `wrong_top_level_types/signature_bool_63` -&gt; `500` body `{"code":"INTERNAL_ERROR","error":"internal_error","message":"Attestation submission failed due to an internal error","ok":false}
+`
+- case `65` `wrong_top_level_types/signature_int_65` -&gt; `500` body `{"code":"INTERNAL_ERROR","error":"internal_error","message":"Attestation submission failed due to an internal error","ok":false}
+`
+- case `66` `wrong_top_level_types/signature_int_66` -&gt; `500` body `{"code":"INTERNAL_ERROR","error":"internal_error","message":"Attestation submission failed due to an internal error","ok":false}
+`
+- case `67` `wrong_top_level_types/signature_float_67` -&gt; `500` body `{"code":"INTERNAL_ERROR","error":"internal_error","message":"Attestation submission failed due to an internal error","ok":false}
+`
+- case `69` `wrong_top_level_types/signature_list_69` -&gt; `500` body `{"code":"INTERNAL_ERROR","error":"internal_error","message":"Attestation submission failed due to an internal error","ok":false}
+`
+- case `71` `wrong_top_level_types/signature_dict_71` -&gt; `500` body `{"code":"INTERNAL_ERROR","error":"internal_error","message":"Attestation submission failed due to an internal error","ok":false}
+`
+- case `73` `wrong_top_level_types/public_key_bool_73` -&gt; `500` body `{"code":"INTERNAL_ERROR","error":"internal_error","message":"Attestation submission failed due to an internal error","ok":false}
+`
+- case `75` `wrong_top_level_types/public_key_int_75` -&gt; `500` body `{"code":"INTERNAL_ERROR","error":"internal_error","message":"Attestation submission failed due to an internal error","ok":false}
+`
+- case `76` `wrong_top_level_types/public_key_int_76` -&gt; `500` body `{"code":"INTERNAL_ERROR","error":"internal_error","message":"Attestation submission failed due to an internal error","ok":false}
+`
+- case `77` `wrong_top_level_types/public_key_float_77` -&gt; `500` body `{"code":"INTERNAL_ERROR","error":"internal_error","message":"Attestation submission failed due to an internal error","ok":false}
+`
+- case `79` `wrong_top_level_types/public_key_list_79` -&gt; `500` body `{"code":"INTERNAL_ERROR","error":"internal_error","message":"Attestation submission failed due to an internal error","ok":false}
+`
+- case `81` `wrong_top_level_types/public_key_dict_81` -&gt; `500` body `{"code":"INTERNAL_ERROR","error":"internal_error","message":"Attestation submission failed due to an internal error","ok":false}
+`
+
+## Notes
+
+This run did not attempt mining, valid attestation, filesystem access, auth bypass, or high-volume traffic. It used fixed invalid nonces and synthetic miner identifiers under the `lazygpt07-fuzz-1112-*` prefix.
+</pre>
+</body></html>
+
