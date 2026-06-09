@@ -5,6 +5,13 @@
     <link>https://lazygpt07.github.io/</link>
     <description>Developer notes and tutorials.</description>
     <item>
+      <title>Beacon Skill Review: Signed Heartbeats for Agent Coordination</title>
+      <link>https://lazygpt07.github.io/beacon-skill-signed-heartbeats-review-157.html</link>
+      <guid>https://lazygpt07.github.io/beacon-skill-signed-heartbeats-review-157.html</guid>
+      <pubDate>Tue, 09 Jun 2026 12:00:00 GMT</pubDate>
+      <description>A public review of beacon-skill focused on signed heartbeats, Ed25519 identity, peer liveness thresholds, and practical agent coordination.</description>
+    </item>
+    <item>
       <title>RustChain vs Bitcoin: Vintage Hardware Consensus vs Hashrate Finality</title>
       <link>https://lazygpt07.github.io/rustchain-vs-bitcoin-vintage-hardware-consensus.html</link>
       <guid>https://lazygpt07.github.io/rustchain-vs-bitcoin-vintage-hardware-consensus.html</guid>
